@@ -1,0 +1,212 @@
+/*
+ * modern — contemporary sans. Tight leading, strong heading contrast, one
+ * accent color, no boxes or rules where whitespace will do.
+ *
+ * Built to be skimmed. Headings carry the structure, so this is the theme for
+ * a spec, a proposal or anything a reader will jump around inside rather than
+ * read straight through.
+ */
+
+@page {
+  size: letter;
+  margin: 0.85in 0.9in;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial,
+    sans-serif;
+  font-size: 10.5pt;
+  line-height: 1.5;
+  color: #16181d;
+  background: #ffffff;
+  font-variant-numeric: tabular-nums;
+}
+
+.markdown-body > *:first-child {
+  margin-top: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+  margin: 1.9em 0 0.5em;
+}
+
+h1 {
+  font-size: 2.3em;
+  font-weight: 700;
+  margin-top: 0;
+  letter-spacing: -0.03em;
+}
+
+h2 {
+  font-size: 1.45em;
+  font-weight: 650;
+}
+
+h3 {
+  font-size: 1.1em;
+  font-weight: 650;
+}
+
+h4,
+h5,
+h6 {
+  font-size: 0.82em;
+  font-weight: 650;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: #5b6270;
+}
+
+p,
+ul,
+ol,
+dl {
+  margin: 0 0 0.9em;
+}
+
+a {
+  color: #2c5fd4;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+ul,
+ol {
+  padding-left: 1.3em;
+}
+
+li + li {
+  margin-top: 0.3em;
+}
+
+li::marker {
+  color: #9aa2b1;
+}
+
+blockquote {
+  margin: 1.2em 0;
+  padding: 0 0 0 1.1em;
+  color: #444b58;
+  border-left: 3px solid #2c5fd4;
+}
+
+blockquote p:last-child {
+  margin-bottom: 0;
+}
+
+hr {
+  height: 1px;
+  margin: 2em 0;
+  background: #e3e6eb;
+  border: 0;
+}
+
+code {
+  padding: 0.12em 0.35em;
+  font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace;
+  font-size: 0.87em;
+  background: #f2f4f7;
+  border-radius: 4px;
+}
+
+pre {
+  margin: 1.2em 0;
+  padding: 0.95em 1.1em;
+  overflow: auto;
+  font-size: 0.82em;
+  line-height: 1.5;
+  color: #e8eaf0;
+  background: #1c2029;
+  border-radius: 8px;
+}
+
+pre code {
+  padding: 0;
+  font-size: 100%;
+  background: transparent;
+}
+
+table {
+  display: table;
+  width: 100%;
+  margin: 1.3em 0;
+  font-size: 0.92em;
+}
+
+th,
+td {
+  padding: 0.5em 0.8em;
+  text-align: left;
+  border-bottom: 1px solid #e3e6eb;
+}
+
+th {
+  font-weight: 650;
+  font-size: 0.85em;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #5b6270;
+  border-bottom: 1.5px solid #c8cdd6;
+}
+
+.footnotes {
+  margin-top: 2.4em;
+  padding-top: 1em;
+  font-size: 0.85em;
+  color: #5b6270;
+  border-top: 1px solid #e3e6eb;
+}
+
+/* Dark code blocks, so the syntax palette is a dark one. */
+.hljs-keyword,
+.hljs-selector-tag,
+.hljs-literal {
+  color: #ff7b9c;
+}
+
+.hljs-string,
+.hljs-regexp,
+.hljs-addition {
+  color: #9ae08a;
+}
+
+.hljs-comment,
+.hljs-quote {
+  color: #7c8598;
+  font-style: italic;
+}
+
+.hljs-title,
+.hljs-title.function_,
+.hljs-section {
+  color: #b99bff;
+}
+
+.hljs-number,
+.hljs-symbol,
+.hljs-attr,
+.hljs-attribute {
+  color: #8ec5ff;
+}
+
+.hljs-variable,
+.hljs-params {
+  color: #ffbf80;
+}
+
+.hljs-built_in,
+.hljs-type {
+  color: #7fd6d0;
+}
+
+.hljs-name,
+.hljs-tag {
+  color: #86e29b;
+}

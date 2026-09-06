@@ -1,0 +1,82 @@
+/*
+ * Base styles. Everything here lives inside `@layer base`, and theme
+ * stylesheets are appended unlayered, so an unlayered theme rule outranks any
+ * rule in this file without needing a more specific selector. That is the whole
+ * reason for the layer: themes get to be written as plain, simple CSS.
+ *
+ * `@page` is the exception and sits outside the layer. Theme stylesheets
+ * override it by declaring their own `@page` later in source order.
+ */
+
+@page {
+  size: letter;
+  margin: 0.75in;
+}
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  body {
+    margin: 0;
+  }
+
+  img,
+  svg,
+  video {
+    max-width: 100%;
+    height: auto;
+  }
+
+  table {
+    border-collapse: collapse;
+  }
+
+  /*
+   * Page-break behavior. This is not decoration. Without it Chromium splits
+   * table rows down the middle and strands headings alone at the foot of a
+   * page.
+   *
+   * Note what is deliberately NOT here: `break-inside: avoid` on `pre`,
+   * `blockquote` or `table`. Any of those can be taller than a page, and an
+   * unbreakable element taller than the page gets clipped rather than moved.
+   * Only elements that are reliably short are made unbreakable.
+   */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    break-after: avoid;
+    break-inside: avoid;
+  }
+
+  tr,
+  figure,
+  img {
+    break-inside: avoid;
+  }
+
+  /* Repeat table headers on every page the table spans. */
+  thead {
+    display: table-header-group;
+  }
+
+  p,
+  li {
+    orphans: 3;
+    widows: 3;
+  }
+
+  /* Footnote bodies belong at the end of the document, not mid-flow. */
+  .footnotes {
+    break-before: auto;
+  }
+}

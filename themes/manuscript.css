@@ -1,0 +1,197 @@
+/*
+ * manuscript — traditional book setting. Serif face, generous margins, a
+ * measure that stays near 70 characters, and quiet rules instead of boxes.
+ *
+ * This is the theme for something that will be read on paper end to end: a
+ * report, an essay, a long brief. It gives up scanability for continuity, which
+ * is the opposite trade from `modern`.
+ */
+
+@page {
+  size: letter;
+  margin: 1in 1.25in;
+}
+
+body {
+  font-family: Charter, 'Iowan Old Style', 'Palatino Linotype', Palatino, Georgia, 'Times New Roman',
+    serif;
+  font-size: 11.5pt;
+  line-height: 1.6;
+  color: #1a1a18;
+  background: #ffffff;
+  hyphens: auto;
+}
+
+.markdown-body > *:first-child {
+  margin-top: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 600;
+  line-height: 1.2;
+  margin: 1.8em 0 0.6em;
+}
+
+h1 {
+  font-size: 1.9em;
+  margin-top: 0;
+  text-align: center;
+  letter-spacing: 0.01em;
+}
+
+h2 {
+  font-size: 1.35em;
+}
+
+h3 {
+  font-size: 1.12em;
+  font-style: italic;
+  font-weight: 500;
+}
+
+h4,
+h5,
+h6 {
+  font-size: 1em;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 600;
+}
+
+p {
+  margin: 0 0 0.85em;
+  text-align: left;
+}
+
+/*
+ * Book convention: a paragraph following another paragraph is indented rather
+ * than spaced. The first paragraph after a heading or a block stays flush,
+ * because there is nothing above it to separate it from.
+ */
+p + p {
+  margin-top: -0.35em;
+  text-indent: 1.4em;
+}
+
+a {
+  color: #1a1a18;
+  text-decoration: underline;
+  text-decoration-thickness: 0.5px;
+  text-underline-offset: 2px;
+}
+
+ul,
+ol {
+  margin: 0 0 0.85em;
+  padding-left: 1.6em;
+}
+
+li + li {
+  margin-top: 0.2em;
+}
+
+blockquote {
+  margin: 1.2em 2em;
+  padding: 0;
+  font-size: 0.95em;
+  font-style: italic;
+  color: #3d3a34;
+}
+
+hr {
+  width: 30%;
+  height: 0;
+  margin: 2em auto;
+  border: 0;
+  border-top: 1px solid #b8b2a7;
+}
+
+code {
+  font-family: 'SF Mono', Menlo, Consolas, monospace;
+  font-size: 0.88em;
+}
+
+pre {
+  margin: 1.2em 0;
+  padding: 0.9em 1.1em;
+  font-size: 0.82em;
+  line-height: 1.45;
+  overflow: auto;
+  background: #f7f4ee;
+  border-left: 2px solid #cfc7b8;
+}
+
+pre code {
+  font-size: 100%;
+}
+
+table {
+  display: table;
+  width: 100%;
+  margin: 1.4em 0;
+  font-size: 0.92em;
+}
+
+th,
+td {
+  padding: 0.4em 0.7em;
+  text-align: left;
+  border-bottom: 1px solid #ddd7cb;
+}
+
+th {
+  font-weight: 600;
+  border-bottom: 1.5px solid #8a8377;
+}
+
+figure,
+img {
+  margin: 1.4em auto;
+  display: block;
+}
+
+.footnotes {
+  margin-top: 2.5em;
+  padding-top: 1em;
+  font-size: 0.85em;
+  border-top: 1px solid #ddd7cb;
+}
+
+.footnotes p + p {
+  text-indent: 0;
+  margin-top: 0;
+}
+
+/* Code coloring stays muted here; heavy syntax color fights a book page. */
+.hljs-keyword,
+.hljs-selector-tag,
+.hljs-literal {
+  color: #7a2f1f;
+}
+
+.hljs-string,
+.hljs-regexp {
+  color: #3f5c3a;
+}
+
+.hljs-comment,
+.hljs-quote {
+  color: #8a8377;
+  font-style: italic;
+}
+
+.hljs-title,
+.hljs-section,
+.hljs-name {
+  color: #4a3f6b;
+}
+
+.hljs-number,
+.hljs-attr {
+  color: #6b5327;
+}
