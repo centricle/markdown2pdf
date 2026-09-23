@@ -4,8 +4,21 @@ Markdown in, PDF out. Styled with plain CSS, printed with the Chrome you already
 have.
 
 ```
+npx @centricle/markdown2pdf notes.md
+```
+
+## Install
+
+```
 npm install -g @centricle/markdown2pdf
-markdown2pdf notes.md
+```
+
+Or run it without installing, with `npx @centricle/markdown2pdf`. To work from
+a checkout instead:
+
+```
+git clone https://github.com/centricle/markdown2pdf.git
+cd markdown2pdf && npm install && npm link
 ```
 
 ## Why another one
@@ -102,6 +115,17 @@ neither, the error says so and tells you the one command that fixes it:
 npx playwright install chromium
 ```
 
+## Security
+
+Raw HTML in the markdown passes through to the document. To keep that from
+being a problem, the page is rendered with scripts disabled, frames and
+plugin elements (`iframe`, `object`, `embed`, `meta`) are stripped, and
+Chromium's file-access flag is not used. A `<script>` in the source does
+nothing, and an `<iframe src="file:///...">` cannot paste a local file into
+the output. What remains is that remote images are fetched at render time, so
+a document can tell a remote host that it was rendered, and when. Treat input
+from a stranger accordingly.
+
 ## Development
 
 ```
@@ -111,6 +135,8 @@ npm test
 The render and theme tests need nothing beyond Node. The end-to-end tests need
 a browser, and their text assertions additionally need poppler's `pdftotext`.
 Both are skipped rather than failed where they are missing.
+
+Bugs and ideas: [github.com/centricle/markdown2pdf/issues](https://github.com/centricle/markdown2pdf/issues).
 
 ## License
 
