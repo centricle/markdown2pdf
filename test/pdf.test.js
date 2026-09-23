@@ -78,18 +78,23 @@ test('a relative image is embedded', { skip: skipText }, () => {
  * Raw HTML is allowed through, so a script in the source must not run. If it
  * did, a hostile document could read local files and post them elsewhere.
  */
-test('scripts in the source do not execute', { skip: skipText }, () => {
+test('scripts and file frames in the source do nothing', { skip: skipText }, () => {
   const dir = tempDir();
   const input = join(dir, 'hostile.md');
+  const secret = join(dir, 'secret.txt');
   const out = join(dir, 'hostile.pdf');
+  writeFileSync(secret, 'CONTENTS OF A LOCAL FILE\n');
   writeFileSync(
     input,
-    '# Static heading\n\n<script>document.querySelector("h1").textContent = "Mutated by script";</script>\n',
+    '# Static heading\n\n' +
+      '<script>document.querySelector("h1").textContent = "Mutated by script";</script>\n\n' +
+      `<iframe src="file://${secret}" width="400" height="200"></iframe>\n`,
   );
   assert.equal(run([input, '-o', out]).status, 0);
   const text = pdfText(out);
   assert.match(text, /Static heading/);
   assert.doesNotMatch(text, /Mutated by script/);
+  assert.doesNotMatch(text, /CONTENTS OF A LOCAL FILE/);
 });
 
 test('--page-numbers prints a footer', { skip: skipText }, () => {

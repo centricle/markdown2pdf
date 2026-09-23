@@ -40,6 +40,17 @@ test('an unknown language still renders, escaped', () => {
   assert.doesNotMatch(html, /<script>alert/);
 });
 
+test('frames, plugins and meta refresh are dropped, raw and in code', () => {
+  const html = renderBody(
+    'Before\n\n<iframe src="file:///etc/hosts"></iframe>\n<object data="x.pdf"></object>\n' +
+      '<EMBED src="x.swf">\n<meta http-equiv="refresh" content="0;url=file:///etc/hosts">\n\n' +
+      '<img src="ok.png">\n\n```\n<iframe src="shown.html"></iframe>\n```\n',
+  );
+  assert.doesNotMatch(html, /<(iframe|object|embed|meta)\b/i);
+  assert.match(html, /<img src="ok.png">/);
+  assert.match(html, /&lt;iframe src=&quot;shown.html&quot;&gt;/, 'code block text is untouched');
+});
+
 test('footnotes render a reference and a body', () => {
   const html = renderBody(sample);
   assert.match(html, /footnote-ref/);
