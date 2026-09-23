@@ -123,6 +123,18 @@ test('an empty document is rejected before a browser is launched', () => {
   assert.match(result.stderr, /is empty/);
 });
 
+test('an output path equal to the input is refused', () => {
+  const dir = tempDir();
+  const input = join(dir, 'notes.pdf');
+  writeFileSync(input, '# Not really a PDF\n');
+  for (const args of [[input], [input, '-o', input]]) {
+    const result = run(args);
+    assert.equal(result.status, 1, args.join(' '));
+    assert.match(result.stderr, /overwrite the input/);
+  }
+  assert.equal(readFileSync(input, 'utf8'), '# Not really a PDF\n');
+});
+
 test('a missing input file is reported by name', () => {
   const result = run([join(tempDir(), 'nope.md')]);
   assert.equal(result.status, 1);

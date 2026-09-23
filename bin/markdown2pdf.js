@@ -163,6 +163,11 @@ const output = values.output
     ? join(process.cwd(), 'document.pdf')
     : join(dirname(resolve(input)), `${basename(input, extname(input))}.pdf`);
 
+/* `markdown2pdf notes.pdf` would otherwise replace the input with its output. */
+if (!fromStdin && output === resolve(input)) {
+  fail(`Output would overwrite the input: ${input}`);
+}
+
 try {
   const html = renderDocument({ markdown, css: readTheme(theme), baseDir });
   const pdf = await htmlToPdf({ html, pageNumbers: values['page-numbers'] });
