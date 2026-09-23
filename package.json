@@ -2,6 +2,7 @@
   "name": "@centricle/markdown2pdf",
   "version": "0.1.0",
   "description": "Markdown to PDF with themeable CSS. Prints with the Chrome you already have.",
+  "author": "Kevin Smith <ksmith@centricle.com> (https://centricle.com)",
   "type": "module",
   "bin": {
     "markdown2pdf": "bin/markdown2pdf.js",
@@ -29,8 +30,16 @@
     "type": "git",
     "url": "git+https://github.com/centricle/markdown2pdf.git"
   },
+  "homepage": "https://github.com/centricle/markdown2pdf#readme",
+  "bugs": {
+    "url": "https://github.com/centricle/markdown2pdf/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
-    "test": "node --test test/*.test.js"
+    "test": "node --test test/*.test.js",
+    "prepublishOnly": "npm test"
   },
   "dependencies": {
     "highlight.js": "^11.12.0",
