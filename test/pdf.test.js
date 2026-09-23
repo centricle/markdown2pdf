@@ -74,6 +74,24 @@ test('a relative image is embedded', { skip: skipText }, () => {
   assert.ok(pdfImageCount(out) >= 1, 'expected the fixture image in the PDF');
 });
 
+/*
+ * Raw HTML is allowed through, so a script in the source must not run. If it
+ * did, a hostile document could read local files and post them elsewhere.
+ */
+test('scripts in the source do not execute', { skip: skipText }, () => {
+  const dir = tempDir();
+  const input = join(dir, 'hostile.md');
+  const out = join(dir, 'hostile.pdf');
+  writeFileSync(
+    input,
+    '# Static heading\n\n<script>document.querySelector("h1").textContent = "Mutated by script";</script>\n',
+  );
+  assert.equal(run([input, '-o', out]).status, 0);
+  const text = pdfText(out);
+  assert.match(text, /Static heading/);
+  assert.doesNotMatch(text, /Mutated by script/);
+});
+
 test('--page-numbers prints a footer', { skip: skipText }, () => {
   const dir = tempDir();
   const plain = join(dir, 'plain.pdf');
