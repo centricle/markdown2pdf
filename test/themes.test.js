@@ -112,6 +112,21 @@ test('the CLI reports which default is active and why', () => {
   assert.match(after.stdout, /Default with no --theme: default/);
 });
 
+test('a theme containing </style is rejected', async () => {
+  const dir = tempDir();
+  const path = join(dir, 'escape.css');
+  writeFileSync(path, 'body {}\n</style><script>alert(1)</script><style>');
+  const { readTheme, resolveTheme } = await themes(tempDir());
+  assert.throws(() => readTheme(resolveTheme(path)), /<\/style/);
+
+  const result = run(['test/fixtures/sample.md', '-t', path, '-o', join(dir, 'out.pdf')], {
+    env: { MARKDOWN2PDF_THEMES_DIR: tempDir() },
+  });
+  assert.equal(result.status, 1);
+  assert.match(result.stderr, /<\/style/);
+  assert.ok(!existsSync(join(dir, 'out.pdf')));
+});
+
 test('the CLI exits nonzero on an unknown theme', () => {
   const result = run(['test/fixtures/sample.md', '-t', 'nope'], {
     env: { MARKDOWN2PDF_THEMES_DIR: tempDir() },
